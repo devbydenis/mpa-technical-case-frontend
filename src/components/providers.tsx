@@ -8,7 +8,7 @@ import { getQueryClient } from "@/lib/query-client";
 const theme = createTheme({
   palette: {
     primary: {
-      main: "#1976d2",
+      main: "#1B5040",
     },
     background: {
       default: "#fafafa",
