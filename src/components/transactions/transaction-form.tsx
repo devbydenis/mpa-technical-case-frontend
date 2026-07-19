@@ -21,6 +21,7 @@ import {
 } from "@mui/material";
 import { FormField } from "@/components/ui/form-field";
 import { LoadingOverlay } from "@/components/ui/loading-overlay";
+import { ErrorState } from "@/components/ui/error-state";
 import { useItems } from "@/hooks/use-items";
 import { CreateTransactionPayload, Item } from "@/types";
 import { INDONESIAN_DAYS, ROMAN_MONTHS } from "@/constants/transaction.constants";
@@ -54,7 +55,11 @@ interface TransactionFormProps {
 }
 
 export function TransactionForm({ onSubmit, loading = false }: TransactionFormProps) {
-  const { data: itemsData, isLoading: itemsLoading } = useItems(1, 1000, "");
+  const {
+    data: itemsData,
+    isLoading: itemsLoading,
+    isError: itemsError,
+  } = useItems(1, 1000, "");
   const items = useMemo(() => itemsData?.data ?? [], [itemsData]);
 
   const {
@@ -123,6 +128,24 @@ export function TransactionForm({ onSubmit, loading = false }: TransactionFormPr
   };
 
   if (itemsLoading) return <LoadingOverlay message="Memuat data barang..." />;
+  if (itemsError)
+    return (
+      <ErrorState
+        message="Gagal memuat data barang"
+        onRetry={() => window.location.reload()}
+      />
+    );
+
+  if (items.length === 0) {
+    return (
+      <Paper variant="outlined" sx={{ p: 3, maxWidth: 600 }}>
+        <Alert severity="warning">
+          Tidak ada barang tersedia. Tambahkan barang terlebih dahulu di menu
+          Master Barang.
+        </Alert>
+      </Paper>
+    );
+  }
 
   return (
     <Paper variant="outlined" sx={{ p: 3, maxWidth: 600 }}>

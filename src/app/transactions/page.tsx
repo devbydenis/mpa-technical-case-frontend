@@ -14,6 +14,7 @@ import {
   useCancelTransaction,
 } from "@/hooks/use-transactions";
 import { useSnackbar } from "@/components/snackbar-provider";
+import { ErrorState } from "@/components/ui/error-state";
 import { StockTransaction } from "@/types";
 
 export default function TransactionsPage() {
@@ -23,7 +24,11 @@ export default function TransactionsPage() {
   const [limit, setLimit] = useState(10);
   const [search, setSearch] = useState("");
 
-  const { data, isLoading } = useTransactions(page + 1, limit, search);
+  const { data, isLoading, isError, error, refetch } = useTransactions(
+    page + 1,
+    limit,
+    search,
+  );
   const cancelMutation = useCancelTransaction();
 
   const [cancelTarget, setCancelTarget] = useState<StockTransaction | null>(null);
@@ -47,6 +52,7 @@ export default function TransactionsPage() {
   };
 
   if (isLoading) return <LoadingOverlay message="Memuat data transaksi..." />;
+  if (isError) return <ErrorState message={error?.message} onRetry={() => refetch()} />;
 
   return (
     <Box>

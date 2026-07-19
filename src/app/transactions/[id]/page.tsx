@@ -6,6 +6,7 @@ import { TransactionDetail } from "@/components/transactions/transaction-detail"
 import { useTransaction, useCancelTransaction } from "@/hooks/use-transactions";
 import { useSnackbar } from "@/components/snackbar-provider";
 import { LoadingOverlay } from "@/components/ui/loading-overlay";
+import { ErrorState } from "@/components/ui/error-state";
 import { ConfirmDialog } from "@/components/ui/confirm-dialog";
 
 export default function TransactionDetailPage({
@@ -18,7 +19,8 @@ export default function TransactionDetailPage({
 
   const { showSuccess, showError } = useSnackbar();
 
-  const { data: transaction, isLoading } = useTransaction(transactionId);
+  const { data: transaction, isLoading, isError, error, refetch } =
+    useTransaction(transactionId);
   const cancelMutation = useCancelTransaction();
 
   const [cancelDialogOpen, setCancelDialogOpen] = useState(false);
@@ -38,6 +40,15 @@ export default function TransactionDetailPage({
   };
 
   if (isLoading) return <LoadingOverlay message="Memuat data transaksi..." />;
+  if (isError)
+    return (
+      <Box>
+        <Typography variant="h4" sx={{ fontWeight: 700, mb: 3 }}>
+          Detail Transaksi
+        </Typography>
+        <ErrorState message={error?.message} onRetry={() => refetch()} />
+      </Box>
+    );
   if (!transaction)
     return <Typography>Transaksi tidak ditemukan</Typography>;
 

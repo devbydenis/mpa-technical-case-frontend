@@ -7,6 +7,7 @@ import { ItemForm } from "@/components/items/item-form";
 import { useItem, useUpdateItem } from "@/hooks/use-items";
 import { useSnackbar } from "@/components/snackbar-provider";
 import { LoadingOverlay } from "@/components/ui/loading-overlay";
+import { ErrorState } from "@/components/ui/error-state";
 import { UpdateItemPayload } from "@/types";
 
 export default function EditItemPage({ params }: { params: Promise<{ id: string }> }) {
@@ -16,7 +17,7 @@ export default function EditItemPage({ params }: { params: Promise<{ id: string 
   const router = useRouter();
   const { showSuccess, showError } = useSnackbar();
 
-  const { data: item, isLoading } = useItem(itemId);
+  const { data: item, isLoading, isError, error, refetch } = useItem(itemId);
   const updateMutation = useUpdateItem();
 
   const handleSubmit = (data: UpdateItemPayload) => {
@@ -35,6 +36,15 @@ export default function EditItemPage({ params }: { params: Promise<{ id: string 
   };
 
   if (isLoading) return <LoadingOverlay message="Memuat data barang..." />;
+  if (isError)
+    return (
+      <Box>
+        <Typography variant="h4" sx={{ fontWeight: 700, mb: 3 }}>
+          Edit Barang
+        </Typography>
+        <ErrorState message={error?.message} onRetry={() => refetch()} />
+      </Box>
+    );
   if (!item) return <Typography>Barang tidak ditemukan</Typography>;
 
   return (

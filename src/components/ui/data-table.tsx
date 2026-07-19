@@ -12,6 +12,7 @@ import {
   Box,
   Typography,
 } from "@mui/material";
+import InboxIcon from "@mui/icons-material/Inbox";
 import { DataTableProps } from "../../types/components/data-table.types";
 
 export function DataTable<T>({
@@ -64,7 +65,21 @@ export function DataTable<T>({
                   align="center"
                   sx={{ py: 6 }}
                 >
-                  <Typography color="text.secondary">{emptyMessage}</Typography>
+                  <Box
+                    sx={{
+                      display: "flex",
+                      flexDirection: "column",
+                      alignItems: "center",
+                      gap: 1,
+                    }}
+                  >
+                    <InboxIcon
+                      sx={{ fontSize: 40, color: "text.disabled" }}
+                    />
+                    <Typography color="text.secondary">
+                      {emptyMessage}
+                    </Typography>
+                  </Box>
                 </TableCell>
               </TableRow>
             ) : (

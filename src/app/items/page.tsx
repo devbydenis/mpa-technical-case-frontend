@@ -11,6 +11,7 @@ import { LoadingOverlay } from "@/components/ui/loading-overlay";
 import { getItemColumns } from "@/components/items/item-columns";
 import { useItems, useDeleteItem } from "@/hooks/use-items";
 import { useSnackbar } from "@/components/snackbar-provider";
+import { ErrorState } from "@/components/ui/error-state";
 import { Item } from "@/types";
 
 export default function ItemsPage() {
@@ -20,7 +21,11 @@ export default function ItemsPage() {
   const [limit, setLimit] = useState(10);
   const [search, setSearch] = useState("");
 
-  const { data, isLoading } = useItems(page + 1, limit, search);
+  const { data, isLoading, isError, error, refetch } = useItems(
+    page + 1,
+    limit,
+    search,
+  );
   const deleteMutation = useDeleteItem();
 
   const [deleteTarget, setDeleteTarget] = useState<Item | null>(null);
@@ -44,6 +49,7 @@ export default function ItemsPage() {
   };
 
   if (isLoading) return <LoadingOverlay message="Memuat data barang..." />;
+  if (isError) return <ErrorState message={error?.message} onRetry={() => refetch()} />;
 
   return (
     <Box>
