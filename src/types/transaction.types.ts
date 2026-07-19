@@ -1,4 +1,4 @@
-import { Item } from "./item";
+import { Item } from "./item.types";
 
 export interface StockTransaction {
   id: number;

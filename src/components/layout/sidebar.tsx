@@ -14,7 +14,7 @@ import {
 } from "@mui/material";
 import Inventory2Icon from "@mui/icons-material/Inventory2";
 import SwapHorizIcon from "@mui/icons-material/SwapHoriz";
-import { DRAWER_WIDTH } from "@/constants/layout";
+import { DRAWER_WIDTH } from "@/constants/layout.constants";
 
 const NAV_ITEMS = [
   {
@@ -52,7 +52,7 @@ export function Sidebar() {
             noWrap
             sx={{ fontWeight: 700, color: "primary.main" }}
           >
-            MPA Dashboard
+            PT Koperasi Kuat
           </Typography>
         </Box>
       </Toolbar>

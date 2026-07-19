@@ -1,13 +1,10 @@
-import { Column } from "@/components/ui/data-table.types";
-import { Item } from "@/types";
+import { Column } from "@/types/components/data-table.types";
+import { Item, ItemColumnsProps } from "@/types";
 import { IconButton, Tooltip } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import Link from "next/link";
 
-interface ItemColumnsProps {
-  onDelete: (item: Item) => void;
-}
 
 export function getItemColumns({ onDelete }: ItemColumnsProps): Column<Item>[] {
   return [
@@ -36,7 +33,11 @@ export function getItemColumns({ onDelete }: ItemColumnsProps): Column<Item>[] {
             </IconButton>
           </Tooltip>
           <Tooltip title="Hapus">
-            <IconButton size="small" color="error" onClick={() => onDelete(item)}>
+            <IconButton
+              size="small"
+              color="error"
+              onClick={() => onDelete(item)}
+            >
               <DeleteIcon fontSize="small" />
             </IconButton>
           </Tooltip>

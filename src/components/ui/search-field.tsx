@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef } from "react";
 import { TextField, InputAdornment } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
-import { SearchFieldProps } from "./search-field.types";
+import { SearchFieldProps } from "../../types/components/search-field.types";
 
 export function SearchField({
   value,

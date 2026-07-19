@@ -2,16 +2,12 @@
 
 import { createContext, useContext, useState, useCallback, ReactNode } from "react";
 import { Snackbar, Alert, AlertColor } from "@mui/material";
+import { SnackbarContextValue } from "@/types/components/snackbar-provider.types";
 
 interface SnackbarState {
   open: boolean;
   message: string;
   severity: AlertColor;
-}
-
-interface SnackbarContextValue {
-  showSuccess: (message: string) => void;
-  showError: (message: string) => void;
 }
 
 const SnackbarContext = createContext<SnackbarContextValue | null>(null);

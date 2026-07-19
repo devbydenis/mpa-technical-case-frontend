@@ -12,7 +12,7 @@ import {
   Box,
   Typography,
 } from "@mui/material";
-import { DataTableProps } from "./data-table.types";
+import { DataTableProps } from "../../types/components/data-table.types";
 
 export function DataTable<T>({
   columns,

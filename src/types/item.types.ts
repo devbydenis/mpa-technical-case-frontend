@@ -22,4 +22,14 @@ export interface CreateItemPayload {
   conversionValue: number;
 }
 
+export interface ItemColumnsProps {
+  onDelete: (item: Item) => void;
+}
+
+export interface ItemFormProps {
+  item?: Item;
+  onSubmit: (data: CreateItemPayload) => void;
+  loading?: boolean;
+}
+
 export type UpdateItemPayload = Partial<CreateItemPayload>;

@@ -6,7 +6,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { Box, Button, Stack, Paper, Typography } from "@mui/material";
 import { FormField } from "@/components/ui/form-field";
-import { Item, CreateItemPayload } from "@/types";
+import { ItemFormProps } from "@/types";
 
 const itemSchema = z.object({
   name: z.string().min(1, "Nama barang wajib diisi"),
@@ -19,12 +19,6 @@ const itemSchema = z.object({
 });
 
 type ItemFormValues = z.infer<typeof itemSchema>;
-
-interface ItemFormProps {
-  item?: Item;
-  onSubmit: (data: CreateItemPayload) => void;
-  loading?: boolean;
-}
 
 export function ItemForm({ item, onSubmit, loading = false }: ItemFormProps) {
   const {

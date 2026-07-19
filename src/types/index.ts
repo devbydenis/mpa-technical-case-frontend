@@ -1,3 +1,3 @@
-export * from "./api";
-export * from "./item";
-export * from "./transaction";
+export * from "./api.types";
+export * from "./item.types";
+export * from "./transaction.types";

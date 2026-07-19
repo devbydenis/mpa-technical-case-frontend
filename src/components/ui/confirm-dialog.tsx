@@ -8,7 +8,7 @@ import {
   DialogActions,
   Button,
 } from "@mui/material";
-import { ConfirmDialogProps } from "./confirm-dialog.types";
+import { ConfirmDialogProps } from "../../types/components/confirm-dialog.types";
 
 export function ConfirmDialog({
   open,

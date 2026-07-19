@@ -2,7 +2,7 @@
 
 import { Box } from "@mui/material";
 import { Sidebar } from "./sidebar";
-import { DRAWER_WIDTH } from "@/constants/layout";
+import { DRAWER_WIDTH } from "@/constants/layout.constants";
 
 export function AppLayout({ children }: { children: React.ReactNode }) {
   return (
