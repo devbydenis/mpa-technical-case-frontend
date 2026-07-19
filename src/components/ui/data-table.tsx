@@ -20,7 +20,6 @@ export function DataTable<T>({
   total,
   page,
   rowsPerPage,
-  loading = false,
   emptyMessage = "Tidak ada data",
   keyExtractor,
   onPageChange,

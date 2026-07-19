@@ -4,6 +4,7 @@ import { ThemeProvider, CssBaseline } from "@mui/material";
 import { createTheme } from "@mui/material/styles";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { getQueryClient } from "@/lib/query-client";
+import { SnackbarProvider } from "./snackbar-provider";
 
 const theme = createTheme({
   palette: {
@@ -35,7 +36,7 @@ export function Providers({ children }: { children: React.ReactNode }) {
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <QueryClientProvider client={queryClient}>
-        {children}
+        <SnackbarProvider>{children}</SnackbarProvider>
       </QueryClientProvider>
     </ThemeProvider>
   );
